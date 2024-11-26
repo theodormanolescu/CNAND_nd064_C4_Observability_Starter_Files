@@ -1,0 +1,8 @@
+.idea
+.vagrant
+Project_Starter_Files-Building_a_Metrics_Dashboard/reference-app/frontend/.idea
+Project_Starter_Files-Building_a_Metrics_Dashboard/reference-app/frontend/venv
+Project_Starter_Files-Building_a_Metrics_Dashboard/reference-app/backend/.idea
+Project_Starter_Files-Building_a_Metrics_Dashboard/reference-app/backend/venv
+Project_Starter_Files-Building_a_Metrics_Dashboard/reference-app/trial/.idea
+Project_Starter_Files-Building_a_Metrics_Dashboard/reference-app/trial/venv
