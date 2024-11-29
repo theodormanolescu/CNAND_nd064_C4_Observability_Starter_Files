@@ -57,7 +57,7 @@ spec:
   endpoints:
     - port: frontend
       path: /metrics
-      interval: 15s
+      interval: 5s
   namespaceSelector:
     matchNames:
       - default

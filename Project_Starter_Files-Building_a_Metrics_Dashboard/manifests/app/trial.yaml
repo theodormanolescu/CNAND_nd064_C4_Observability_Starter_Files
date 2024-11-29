@@ -2,13 +2,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: trial
-  labels:
-    name: trial
-    release: prometheus
-  annotations:
-    prometheus.io/scrape: "true"
-    prometheus.io/path: /metrics
-    prometheus.io/port: "8082"
 spec:
   replicas: 1
   selector:
@@ -35,25 +28,5 @@ spec:
     app: trial
   ports:
     - port: 8082
-      targetPort: 8080
+      targetPort: 8082
   type: LoadBalancer
----
-apiVersion: monitoring.coreos.com/v1
-kind: ServiceMonitor
-metadata:
-  name: trial
-  namespace: monitoring
-  labels:
-    app: trial
-    release: prometheus
-spec:
-  selector:
-    matchLabels:
-      app: trial
-  endpoints:
-    - port: "8082"
-      path: /metrics
-      interval: 15s
-  namespaceSelector:
-    matchNames:
-      - default

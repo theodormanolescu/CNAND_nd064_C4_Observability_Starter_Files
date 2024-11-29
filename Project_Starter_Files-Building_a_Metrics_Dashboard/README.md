@@ -34,46 +34,67 @@ Describe in detail 5 metrics to measure these SLIs.
 - **Latency**: The time taken for a request to travel from the client to the server and back.
 
 ## Create a Dashboard to measure our SLIs
-*TODO:* Create a dashboard to measure the uptime of the frontend and backend services
+Create a dashboard to measure the uptime of the frontend and backend services
 We will also want to measure to measure 40x and 50x errors. 
 Create a dashboard that show these values over a 24 hour period and take a screenshot.
-
+*NOTE*: Added for 12 hours,for 24 it would be hard to see the data.
+![](answer-img/uptime_and_response_codes.png)
 ## Tracing our Flask App
-*TODO:*  We will create a Jaeger span to measure the processes on the backend.
+We will create a Jaeger span to measure the processes on the backend.
 Once you fill in the span, provide a screenshot of it here.
 Also provide a (screenshot) sample Python file containing a trace and span code used to perform Jaeger traces on the backend service.
-
+![](answer-img/span.png)
 ## Jaeger in Dashboards
-*TODO:* Now that the trace is running, let's add the metric to our current Grafana dashboard.
+Now that the trace is running, let's add the metric to our current Grafana dashboard.
 Once this is completed, provide a screenshot of it here.
-
+![](answer-img/span2.png)
 ## Report Error
-*TODO:* Using the template below, write a trouble ticket for the developers,
+Using the template below, write a trouble ticket for the developers,
 to explain the errors that you are seeing (400, 500, latency) and to let them know the file that is 
 causing the issue also include a screenshot of the tracer span to demonstrate how we can user a tracer to locate errors easily.
 
 TROUBLE TICKET
 
-Name:
+Name: Theodor Manolescu
 
-Date:
+Date: 28/11/2024
 
-Subject:
+Subject: can't access the service
 
-Affected Area:
+Affected Area: Backend Service, /star endpoint
 
-Severity:
+Severity: High
 
 Description:
-
+The request made to the /star endpoint is returning a 405 not allowed error.
+This is causing the service to be unavailable.
+The error is likely due to a misconfiguration in the backend service.
+![](answer-img/span_405.png)
 
 ## Creating SLIs and SLOs
-*TODO:* We want to create an SLO guaranteeing that our application has a 99.95% uptime per month. 
+We want to create an SLO guaranteeing that our application has a 99.95% uptime per month. 
 Name four SLIs that you would use to measure the success of this SLO.
+- **Uptime Percentage**: The percentage of time the service is available over a month.
+- **Error Rate**: The percentage of requests that result in errors (4xx and 5xx status codes).
+- **Latency**: The time taken for a request to travel from the client to the server and back.
+- **Resource Utilization**: The percentage of CPU, memory, and other resources used by the service.
 
 ## Building KPIs for our plan
-*TODO*: Now that we have our SLIs and SLOs, create a list of 2-3 KPIs to accurately measure these metrics as well as a description of why those KPIs were chosen. We will make a dashboard for this, but first write them down here.
+Now that we have our SLIs and SLOs, create a list of 2-3 KPIs to accurately measure these metrics as well as a description of why those KPIs were chosen. We will make a dashboard for this, but first write them down here.
+- service uptime of at least 99.95% per month
+- error rate of less than 0.05%
+- resource utilization of less than 80%
 
 ## Final Dashboard
-*TODO*: Create a Dashboard containing graphs that capture all the metrics of your KPIs and adequately representing your SLIs and SLOs. 
+Create a Dashboard containing graphs that capture all the metrics of your KPIs and adequately representing your SLIs and SLOs. 
 Include a screenshot of the dashboard here, and write a text description of what graphs are represented in the dashboard.  
+![](answer-img/final_dashboard.png)
+Uptime
+    - shows the uptime of the services over the last 3 hours.
+Errors frontend and backend 
+    - shows the number or req/min of the frontend and backend services over the last 3 hours.
+    - it filters for 4xx and 5xx errors.   
+CPU Usage
+    - shows the CPU usage of the services over the last 3 hours.
+Memory Usage
+    - shows the memory usage of the services over the last 3 hours.

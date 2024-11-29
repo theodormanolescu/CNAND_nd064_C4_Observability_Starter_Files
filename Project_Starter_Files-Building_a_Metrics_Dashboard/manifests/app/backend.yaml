@@ -6,9 +6,10 @@ metadata:
     name: backend
     release: prometheus
   annotations:
+    sidecar.jaegertracing.io/inject: "true"
     prometheus.io/scrape: "true"
     prometheus.io/path: /metrics
-    prometheus.io/port: "8081"
+    prometheus.io/port: bport
 spec:
   replicas: 1
   selector:
@@ -22,20 +23,27 @@ spec:
       containers:
         - name: backend
           image: theodormanolescu/observability:backend
+          env:
+            - name: JAEGER_HOST
+              value: simplest-agent.observability.svc.cluster.local
           imagePullPolicy: Always
           ports:
-            - containerPort: 8081
+            - name: bport
+              containerPort: 8080
 ---
 apiVersion: v1
 kind: Service
 metadata:
   name: backend
+  labels:
+    app: backend
 spec:
   selector:
     app: backend
   ports:
-    - port: 8081
-      targetPort: 8080
+    - name: backend
+      port: 8081
+      targetPort: bport
   type: LoadBalancer
 ---
 apiVersion: monitoring.coreos.com/v1
@@ -51,9 +59,9 @@ spec:
     matchLabels:
       app: backend
   endpoints:
-    - port: "8081"
+    - port: backend
       path: /metrics
-      interval: 15s
+      interval: 5s
   namespaceSelector:
     matchNames:
       - default

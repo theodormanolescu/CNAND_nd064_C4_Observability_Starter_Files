@@ -8,3 +8,5 @@ Werkzeug==2.2.3
 Flask-PyMongo==2.3.0
 prometheus-client==0.17.1
 prometheus_flask_exporter==0.23.1
+Flask-OpenTracing==2.0.0
+jaeger-client==4.8.0
